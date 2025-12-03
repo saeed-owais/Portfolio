@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saeed Owais | Full-Stack .NET Developer</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS (via CDN for standalone usage) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in': 'fade-in 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for Reveal Animation */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4; 
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500 selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-slate-800/50 backdrop-blur-md bg-slate-950/80">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tighter flex items-center gap-2 group">
+                <span class="text-cyan-400 group-hover:text-cyan-300 transition-colors">{</span>
+                <span class="text-white">SO</span>
+                <span class="text-cyan-400 group-hover:text-cyan-300 transition-colors">}</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
+                <a href="#contact" class="px-5 py-2 rounded-full border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all">
+                    Hire Me
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-800 absolute w-full left-0 animate-fade-in">
+            <div class="flex flex-col p-6 gap-4">
+                <a href="#about" class="mobile-link text-left py-2 hover:text-cyan-400">About</a>
+                <a href="#skills" class="mobile-link text-left py-2 hover:text-cyan-400">Skills</a>
+                <a href="#projects" class="mobile-link text-left py-2 hover:text-cyan-400">Projects</a>
+                <a href="#experience" class="mobile-link text-left py-2 hover:text-cyan-400">Experience</a>
+                <a href="#contact" class="mobile-link text-left py-2 text-cyan-400 font-bold">Hire Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+            <div class="absolute top-20 right-10 w-72 h-72 bg-cyan-600 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+        </div>
+        
+        <!-- Grid Pattern -->
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 z-0 pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div class="reveal-section order-2 md:order-1">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-mono font-semibold tracking-wider text-cyan-400 bg-cyan-900/20 rounded-full border border-cyan-800">
+                    OPEN TO WORK
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+                    Hello, I'm <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Saeed Owais</span>
+                </h1>
+                <h2 class="text-xl md:text-2xl text-slate-400 mb-6 font-light">
+                    Full-Stack .NET Developer <span class="text-slate-600 mx-2">|</span> Angular Specialist
+                </h2>
+                <p class="text-slate-400 text-lg leading-relaxed max-w-lg mb-8">
+                    Specializing in scalable .NET applications and Angular front-ends. Experienced with <span class="text-slate-200 font-medium">Clean Architecture</span>, <span class="text-slate-200 font-medium">SOLID</span> principles, and building secure, high-performance enterprise systems.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="alert('Downloading CV...')" class="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-lg transition-all shadow-lg shadow-cyan-500/20 flex items-center gap-2">
+                        <i class="fas fa-download"></i> Download CV
+                    </button>
+                    <a href="https://github.com/saeed-owais" target="_blank" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-lg transition-all flex items-center gap-2 border border-slate-700">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="reveal-section order-1 md:order-2 flex justify-center relative">
+                <!-- Code Window Graphic -->
+                <div class="w-full max-w-md bg-slate-900 rounded-xl overflow-hidden shadow-2xl border border-slate-800 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                    <div class="flex items-center gap-2 px-4 py-3 bg-slate-800 border-b border-slate-700">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="ml-2 text-xs text-slate-400 font-mono">CleanArchitecture.sln</span>
+                    </div>
+                    <div class="p-6 font-mono text-xs md:text-sm overflow-hidden">
+                        <div class="text-purple-400">public class <span class="text-yellow-400">Developer</span> : <span class="text-yellow-400">BaseEntity</span></div>
+                        <div class="text-slate-300">{</div>
+                        <div class="pl-4 text-slate-300">
+                            <span class="text-purple-400">public</span> string Name { get; } = <span class="text-green-400">"Saeed Owais"</span>;
+                        </div>
+                        <div class="pl-4 text-slate-300">
+                            <span class="text-purple-400">public</span> string[] Stack { get; } = [
+                        </div>
+                        <div class="pl-8 text-cyan-400">".NET 8",</div>
+                        <div class="pl-8 text-cyan-400">"Angular",</div>
+                        <div class="pl-8 text-cyan-400">"SQL Server"</div>
+                        <div class="pl-4 text-slate-300">];</div>
+                        <div class="pl-4 mt-2 text-slate-500">// Ready to build scalable systems</div>
+                        <div class="pl-4">
+                            <span class="text-purple-400">public</span> <span class="text-purple-400">void</span> <span class="text-blue-400">SolveProblem</span>() => ...
+                        </div>
+                        <div class="text-slate-300">}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="reveal-section mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
+                <div class="w-20 h-1 bg-cyan-500 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="md:col-span-2 reveal-section">
+                    <p class="text-slate-400 text-lg leading-relaxed mb-6">
+                        I am a passionate <span class="text-white font-semibold">Software Engineer</span> based in Egypt, dedicated to crafting high-performance enterprise applications. While early in my career, I approach development with a senior mindset—prioritizing maintainability, scalability, and clean code above all else.
+                    </p>
+                    <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                        My core strength lies in bridging the gap between complex backend logic using <span class="text-cyan-400">.NET</span> and dynamic, responsive user interfaces with <span class="text-purple-400">Angular</span>. I thrive in agile environments where strong teamwork, research, and communication are valued.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                        <div class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center">
+                            <i class="fas fa-map-marker-alt text-2xl text-cyan-500 mb-2"></i>
+                            <h4 class="font-semibold">Location</h4>
+                            <p class="text-sm text-slate-500">Egypt</p>
+                        </div>
+                        <div class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center">
+                            <i class="fas fa-language text-2xl text-purple-500 mb-2"></i>
+                            <h4 class="font-semibold">English</h4>
+                            <p class="text-sm text-slate-500">Intermediate</p>
+                        </div>
+                        <div class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center">
+                            <i class="fas fa-users text-2xl text-green-500 mb-2"></i>
+                            <h4 class="font-semibold">Teamwork</h4>
+                            <p class="text-sm text-slate-500">Collaborative</p>
+                        </div>
+                        <div class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center">
+                            <i class="fas fa-search text-2xl text-yellow-500 mb-2"></i>
+                            <h4 class="font-semibold">Research</h4>
+                            <p class="text-sm text-slate-500">Problem Solver</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal-section delay-200">
+                    <div class="h-full w-full bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border border-slate-700 p-8 flex flex-col justify-center items-center relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 z-10">Soft Skills</h3>
+                        <ul class="space-y-4 z-10 w-full">
+                            <li class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                                <span class="text-slate-300">Adaptability</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                <span class="text-slate-300">Continuous Learning</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
+                                <span class="text-slate-300">Technical Writing</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                                <span class="text-slate-300">Time Management</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="reveal-section mb-12 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Technical Arsenal</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    My stack is built around the .NET ecosystem and modern frontend frameworks, ensuring type safety, performance, and scalability.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="skills-container">
+                <!-- Skills will be injected here via JS to keep HTML clean, or hardcoded for SEO/No-JS. 
+                     For this "Native" version, I will hardcode them to ensure it works instantly without complex JS logic arrays. -->
+                
+                <!-- Backend -->
+                <div class="reveal-section bg-slate-950 p-6 rounded-xl border border-slate-800 hover:border-cyan-500/50 transition-colors group">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-cyan-900/30 rounded-lg flex items-center justify-center text-cyan-400 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Backend Development</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">.NET 8</span>
+                        <span class="skill-tag">ASP.NET Core</span>
+                        <span class="skill-tag">Web API</span>
+                        <span class="skill-tag">MVC</span>
+                        <span class="skill-tag">Clean Architecture</span>
+                        <span class="skill-tag">SOLID</span>
+                        <span class="skill-tag">SignalR</span>
+                    </div>
+                </div>
+
+                <!-- Database -->
+                <div class="reveal-section bg-slate-950 p-6 rounded-xl border border-slate-800 hover:border-cyan-500/50 transition-colors group delay-100">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-400 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Database & ORM</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">EF Core</span>
+                        <span class="skill-tag">LINQ</span>
+                        <span class="skill-tag">Dapper</span>
+                        <span class="skill-tag">ADO.NET</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+
+                <!-- Frontend -->
+                <div class="reveal-section bg-slate-950 p-6 rounded-xl border border-slate-800 hover:border-purple-500/50 transition-colors group delay-200">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-400 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fab fa-angular"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Frontend</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">Angular</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">RxJS</span>
+                        <span class="skill-tag">HTML5/CSS3</span>
+                        <span class="skill-tag">Bootstrap</span>
+                        <span class="skill-tag">Angular Material</span>
+                    </div>
+                </div>
+
+                <!-- Core -->
+                <div class="reveal-section bg-slate-950 p-6 rounded-xl border border-slate-800 hover:border-green-500/50 transition-colors group">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-green-900/30 rounded-lg flex items-center justify-center text-green-400 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Core Concepts</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">Data Structures</span>
+                        <span class="skill-tag">Algorithms</span>
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Agile/Scrum</span>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="reveal-section bg-slate-950 p-6 rounded-xl border border-slate-800 hover:border-orange-500/50 transition-colors group delay-100">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-orange-900/30 rounded-lg flex items-center justify-center text-orange-400 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Tools & DevOps</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Visual Studio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative overflow-hidden">
+        <div class="absolute -right-20 top-40 text-[200px] font-bold text-slate-800/20 pointer-events-none select-none">WORK</div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="reveal-section mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
+                <div class="w-20 h-1 bg-cyan-500 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="reveal-section group relative bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20">
+                    <div class="aspect-video bg-slate-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent z-10"></div>
+                        <div class="w-full h-full flex items-center justify-center bg-slate-800 group-hover:scale-105 transition-transform duration-500">
+                            <i class="fas fa-shopping-cart text-6xl text-slate-700"></i>
+                        </div>
+                        <div class="absolute top-4 right-4 z-20 flex gap-2">
+                            <span class="bg-cyan-600/90 backdrop-blur text-white text-xs font-bold px-2 py-1 rounded">ASP.NET Core</span>
+                            <span class="bg-purple-600/90 backdrop-blur text-white text-xs font-bold px-2 py-1 rounded">MVC</span>
+                        </div>
+                    </div>
+
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">Multi-Interface E-Commerce Platform</h3>
+                        <p class="text-slate-400 text-sm mb-6 line-clamp-3">
+                            A robust e-commerce solution with a reusable 3-Tier backend (BLL/DAL). Features ASP.NET Core Identity for auth, a dedicated Admin dashboard using MVC, and a Headless REST API for client consumption. Implements auditing and high-performance IQueryable projections.
+                        </p>
+                        
+                        <div class="mb-6">
+                            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Key Tech</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-2 py-1 bg-slate-800 rounded text-cyan-300">Repository + UoW</span>
+                                <span class="text-xs px-2 py-1 bg-slate-800 rounded text-cyan-300">EF Core Soft Delete</span>
+                                <span class="text-xs px-2 py-1 bg-slate-800 rounded text-cyan-300">API Response Wrapper</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 pt-4 border-t border-slate-800">
+                            <a href="https://github.com/saeed-owais/MVC_E-Commerce" target="_blank" class="text-sm font-semibold hover:text-cyan-400 flex items-center gap-2">
+                                <i class="fab fa-github"></i> View Source
+                            </a>
+                            <span class="text-slate-600">|</span>
+                            <a href="#" class="text-sm font-semibold hover:text-cyan-400 flex items-center gap-2 opacity-50 cursor-not-allowed">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder 1 -->
+                <div class="reveal-section delay-100 bg-slate-900/30 border border-slate-800 border-dashed rounded-2xl flex flex-col items-center justify-center p-12 text-center group hover:bg-slate-900/50 transition-colors">
+                    <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-plus text-slate-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-300 mb-2">Clean Architecture API</h3>
+                    <p class="text-slate-500 text-sm max-w-xs">Coming Soon. A dedicated Clean Architecture template for scalable enterprise APIs.</p>
+                </div>
+
+                 <!-- Placeholder 2 -->
+                 <div class="reveal-section delay-200 bg-slate-900/30 border border-slate-800 border-dashed rounded-2xl flex flex-col items-center justify-center p-12 text-center group hover:bg-slate-900/50 transition-colors">
+                    <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-plus text-slate-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-300 mb-2">Angular Enterprise Dashboard</h3>
+                    <p class="text-slate-500 text-sm max-w-xs">Coming Soon. Advanced Angular concepts including Signals, RxJS, and dynamic components.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education -->
+    <section id="experience" class="py-24 bg-slate-900/30">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16">
+                
+                <!-- Experience -->
+                <div>
+                    <div class="reveal-section mb-8 flex items-center gap-3">
+                        <i class="fas fa-briefcase text-2xl text-cyan-400"></i>
+                        <h2 class="text-3xl font-bold">Experience</h2>
+                    </div>
+                    
+                    <div class="space-y-8 border-l-2 border-slate-800 ml-3 pl-8 relative">
+                        <!-- Timeline Item -->
+                        <div class="reveal-section relative">
+                            <div class="absolute -left-[41px] top-1 w-5 h-5 bg-slate-950 border-4 border-cyan-500 rounded-full"></div>
+                            
+                            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-slate-200">.NET Developer Intern</h3>
+                                    <span class="text-xs font-mono bg-cyan-900/30 text-cyan-400 px-2 py-1 rounded">Jun 2025 – Nov 2025</span>
+                                </div>
+                                <h4 class="text-lg text-slate-400 mb-4">ITI Assiut</h4>
+                                <p class="text-slate-400 text-sm mb-4">
+                                    Intensive internship focused on building enterprise-grade applications.
+                                </p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-sm text-slate-300">
+                                        <i class="fas fa-check text-cyan-500 mt-1"></i>
+                                        Built enterprise apps using Angular + .NET Core.
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm text-slate-300">
+                                        <i class="fas fa-check text-cyan-500 mt-1"></i>
+                                        Implemented MVC, Web API, DI, and Global Error Handling.
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm text-slate-300">
+                                        <i class="fas fa-check text-cyan-500 mt-1"></i>
+                                        Participated in Agile workflows, daily stand-ups, and code reviews.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <div class="reveal-section mb-8 flex items-center gap-3">
+                        <i class="fas fa-graduation-cap text-2xl text-purple-400"></i>
+                        <h2 class="text-3xl font-bold">Education</h2>
+                    </div>
+                    
+                    <div class="space-y-8 border-l-2 border-slate-800 ml-3 pl-8 relative">
+                        <!-- Timeline Item -->
+                        <div class="reveal-section relative">
+                            <div class="absolute -left-[41px] top-1 w-5 h-5 bg-slate-950 border-4 border-purple-500 rounded-full"></div>
+                            
+                            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800">
+                                <h3 class="text-xl font-bold text-slate-200">B.Sc. Computer Science</h3>
+                                <h4 class="text-lg text-slate-400 mb-2">El Shorouk Academy</h4>
+                                <p class="text-slate-500 text-sm">
+                                    Relevant Coursework: Data Structures, Algorithms, Database Management Systems, Software Engineering, OOP.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Problem Solving Stats -->
+                    <div class="mt-12 reveal-section">
+                        <div class="flex items-center gap-3 mb-6">
+                            <i class="fas fa-code-branch text-2xl text-green-400"></i>
+                            <h2 class="text-2xl font-bold">Problem Solving</h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- LeetCode -->
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-800 flex flex-col items-center">
+                                <i class="fas fa-code text-yellow-500 text-2xl mb-2"></i>
+                                <span class="font-bold text-lg">LeetCode</span>
+                                <span class="text-slate-500 text-xs">Active Problem Solver</span>
+                            </div>
+                            <!-- Codeforces -->
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-800 flex flex-col items-center">
+                                <i class="fas fa-chart-bar text-blue-500 text-2xl mb-2"></i>
+                                <span class="font-bold text-lg">Codeforces</span>
+                                <span class="text-slate-500 text-xs">Competitive Programming</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative">
+        <div class="container mx-auto px-6">
+           <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-8 md:p-16 border border-slate-700 shadow-2xl">
+             <div class="grid md:grid-cols-2 gap-12">
+               
+               <div class="reveal-section">
+                 <h2 class="text-3xl md:text-4xl font-bold mb-6">Let's Build Something Amazing</h2>
+                 <p class="text-slate-400 mb-8">
+                   I'm currently available for full-time opportunities. If you're looking for a dedicated .NET/Angular developer who cares about architecture and quality, get in touch.
+                 </p>
+                 
+                 <div class="space-y-6">
+                   <div class="flex items-center gap-4">
+                     <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-cyan-400">
+                       <i class="fas fa-envelope"></i>
+                     </div>
+                     <div>
+                       <div class="text-xs text-slate-500 uppercase font-bold">Email</div>
+                       <a href="mailto:saidewisali@gmail.com" class="text-slate-200 hover:text-cyan-400 transition-colors">saidewisali@gmail.com</a>
+                     </div>
+                   </div>
+
+                   <div class="flex items-center gap-4">
+                     <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-cyan-400">
+                       <i class="fas fa-phone"></i>
+                     </div>
+                     <div>
+                       <div class="text-xs text-slate-500 uppercase font-bold">Phone</div>
+                       <a href="tel:+201119121841" class="text-slate-200 hover:text-cyan-400 transition-colors">+20 111 912 1841</a>
+                     </div>
+                   </div>
+
+                   <div class="flex items-center gap-4">
+                     <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-cyan-400">
+                       <i class="fab fa-linkedin-in"></i>
+                     </div>
+                     <div>
+                       <div class="text-xs text-slate-500 uppercase font-bold">LinkedIn</div>
+                       <a href="https://linkedin.com/in/saeed-owais" target="_blank" class="text-slate-200 hover:text-cyan-400 transition-colors">linkedin.com/in/saeed-owais</a>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+
+               <div class="reveal-section delay-100">
+                 <form id="contactForm" class="space-y-4">
+                   <div>
+                     <label class="block text-sm font-medium text-slate-400 mb-2">Your Name</label>
+                     <input required type="text" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600" placeholder="John Doe">
+                   </div>
+                   
+                   <div>
+                     <label class="block text-sm font-medium text-slate-400 mb-2">Email Address</label>
+                     <input required type="email" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600" placeholder="john@example.com">
+                   </div>
+
+                   <div>
+                     <label class="block text-sm font-medium text-slate-400 mb-2">Message</label>
+                     <textarea required rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600" placeholder="Hi Saeed, I'd like to discuss a project..."></textarea>
+                   </div>
+
+                   <button type="submit" class="w-full bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-white font-bold py-3 rounded-lg shadow-lg shadow-cyan-900/50 transition-all">
+                     Send Message
+                   </button>
+                 </form>
+               </div>
+
+             </div>
+           </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-8 text-center">
+        <p class="text-slate-500 text-sm">
+            &copy; <span id="year"></span> Saeed Owais. Built with Native technologies.
+        </p>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <a href="mailto:saidewisali@gmail.com" class="fixed bottom-8 right-8 bg-cyan-500 hover:bg-cyan-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/30 z-40 transition-transform hover:scale-110 md:hidden">
+        <i class="fas fa-envelope text-xl"></i>
+    </a>
+
+    <!-- Application Logic -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // 2. Intersection Observer for Animations (Reveal on Scroll)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // observer.unobserve(entry.target); // Optional: Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-section').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 3. Update Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 4. Form Handling
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Message sent successfully! (Simulation)');
+            e.target.reset();
+        });
+
+        // 5. Add skill-tag class logic (applying styles dynamically for cleaner HTML)
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.className = 'px-3 py-1 bg-slate-800 text-slate-300 text-sm rounded-full border border-slate-700';
+        });
+    </script>
+</body>
+</html>
